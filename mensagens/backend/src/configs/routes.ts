@@ -10,7 +10,7 @@ routes.get('', (req, res) => {
 
 
 routes.get('/messages', (req, res) => messageController.get(req, res))
-routes.post('/message', (req, res) => messageController.createMessage(req, res))
+routes.post('/messages', (req, res) => messageController.createMessage(req, res))
 
 
 export default routes

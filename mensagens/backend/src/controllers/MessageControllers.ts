@@ -9,7 +9,6 @@ export default class MessageController {
     Object.bind(this.get, this)
   }
 
-
   createMessage(req: Request, res: Response) {
     let {
       author, message

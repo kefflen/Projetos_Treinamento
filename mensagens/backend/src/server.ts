@@ -12,6 +12,7 @@ const io = new Server(serverHttp, {
 io.on('connection', socket => {
   console.log('Usuario conectado no socket: ' + socket.id)
 })
+
 export {
   io
 }

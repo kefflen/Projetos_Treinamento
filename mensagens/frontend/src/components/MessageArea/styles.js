@@ -11,6 +11,11 @@ export const MessageWriterDiv = styled.div`
   border-radius: 10px;
   color: white;
 
+  button {
+    padding: 10px;
+    background-color: #794c93;
+  }
+
   .author-input {
     display: flex;
     align-items: baseline;
