@@ -5,10 +5,9 @@ export default function MessageNavigation({messages}) {
 
   return (
     <MessageNavigationDiv className="message-navigation">
-      <Message />
-      <Message />
-      <Message />
-      <Message />
+      {messages.map(message => {
+        return <Message key={message.id} message={message}/>
+      })}
     </MessageNavigationDiv>
   )
 }

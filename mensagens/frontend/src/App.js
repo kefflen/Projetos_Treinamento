@@ -1,11 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
 import MessageNavigation from './components/MessagesNavigation';
 import MessageWriter from './components/MessageArea/Index';
+import api from './services/api';
+import { useEffect, useState } from 'react'
+
 function App() {
+  const [messages, setMessages] = useState([])
+  
+  useEffect(() => {
+    api.get('/messages')
+      .then(response => {
+        setMessages(response.data)
+      })
+  }, [])
+
   return (
     <div className="App">
-      <MessageNavigation />
+      <MessageNavigation messages={messages}/>
       <MessageWriter />
     </div>
   );

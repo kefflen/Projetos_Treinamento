@@ -1,17 +1,18 @@
 import { MessageDiv } from './styles'
 
 
-export default function Message({ message, author, publishedAt}) {
+export default function Message({message}) {
+  const { message: text, author, publishedAt } = message
   return (
     <MessageDiv>
       <div className='message-title'>
-        Autor: Kefflen Moreno Ramos
+        Autor: {author}
       </div>
       <div className='message-text'>
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+        {text}
       </div>
       <div className='message-footer'>
-        Publicado em: 30/03/2022
+        Publicado em: {publishedAt}
       </div>
     </MessageDiv>
   )

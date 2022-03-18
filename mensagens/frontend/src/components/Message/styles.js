@@ -13,6 +13,7 @@ export const MessageDiv = styled.div`
     display: flex;
     justify-content: flex-start;
     font-size: 1.25rem;
+    font-weight: 600;
     color: indigo;
     border-bottom: solid 1px #333;
   }
