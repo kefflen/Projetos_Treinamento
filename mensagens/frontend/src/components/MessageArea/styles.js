@@ -14,6 +14,7 @@ export const MessageWriterDiv = styled.div`
   button {
     padding: 10px;
     background-color: #794c93;
+    position: relative;
   }
 
   .author-input {

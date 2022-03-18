@@ -9,20 +9,17 @@ export default function MessageWriter() {
 
 
   function sendMessage() {
-    console.log({
-      author, message
-    })
     
     if ([author, message].every(value => value && value.length > 1)) {
       api.post('/messages', {
         author, message
-      }).then(response => console.log(response.data))
+      })
     }
     
     setMessage('')
   }
 
-  function onKeyPress() {
+  function onKeyPress(event) {
     var key = window.event.keyCode;
     if (key === 13) {
       sendMessage()
@@ -36,7 +33,10 @@ export default function MessageWriter() {
         <input value={author} onChange={event => setAuthor(event.value)}/>
       </div>
       <div className="message-input">
-        <textarea value={message} onKeyPress={onKeyPress} onChange={event => setMessage(event.target.value)}>
+        <textarea value={message} onKeyDown={onKeyPress} onChange={event => {
+          let text = event.target.value.replace(/(\r\n|\n|\r)/gm, "")
+          setMessage(text)
+          }}>
         </textarea>
       </div>
       <button onClick={sendMessage}>Enviar mensagem</button>

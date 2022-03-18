@@ -1,6 +1,7 @@
 import Message from "../Message";
 import { MessageNavigationDiv } from "./styles";
 
+
 export default function MessageNavigation({messages}) {
 
   return (

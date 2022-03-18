@@ -2,6 +2,7 @@ import app from "./configs/app";
 import http from 'http'
 import { Server } from "socket.io";
 
+
 const serverHttp = http.createServer(app)
 const io = new Server(serverHttp, {
   cors: {

@@ -3,12 +3,23 @@ import MessageNavigation from './components/MessagesNavigation';
 import MessageWriter from './components/MessageArea/Index';
 import api from './services/api';
 import { useEffect, useState } from 'react'
+import io from 'socket.io-client'
+
+const socket = io('http://localhost:8080')
 
 function App() {
-  const [messages, setMessages] = useState([])
+  let [messages, setMessages] = useState([])
   
+  useEffect(function () {
+    socket.off('new_message')
+    socket.on('new_message', message => {
+      let newMessages = [message, ...messages]
+      setMessages(() => newMessages)
+    })
+  }, [messages])
+
   useEffect(() => {
-    api.get('/messages')
+    api.get('/messages?take=10')
       .then(response => {
         setMessages(response.data)
       })
