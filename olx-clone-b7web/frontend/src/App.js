@@ -1,14 +1,20 @@
 import { connect } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import './App.css'
+
+import { Template } from './components/MainComponents'
+import Footer from './components/partials/Footer'
+import Header from './components/partials/Header'
 import Routes from './routes'
 
 function App(props) {
   return (
     <BrowserRouter>
-      <div className="App">
+      <Template>
+        <Header />
         <Routes />
-      </div>    
+        <Footer />
+      </Template>
     </BrowserRouter>
   )
 }
