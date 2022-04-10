@@ -1,0 +1,117 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Pessoa {
+  id         Int         @id @default(autoincrement())
+  fotografo  Fotografo?
+  cliente    Cliente?
+  email      String
+  endereco   Endereco    @relation(fields: [enderecoId], references: [id])
+  enderecoId Int
+}
+
+model Fotografo {
+  id     Int    @id
+  pessoa Pessoa @relation(fields: [id], references: [id])
+
+  FotografoServico FotografoServico[]
+}
+
+model FotografoServico {
+  fotografoId Int
+  eventoId    Int
+  pagamento   Float
+  fotografo   Fotografo @relation(fields: [fotografoId], references: [id])
+  evento      Evento    @relation(fields: [eventoId], references: [id])
+
+  @@id([fotografoId, eventoId])
+}
+
+model ClienteFormatura {
+  formaturaId Int
+  clienteId   Int
+  ficha       Int
+  escolaId    Int
+
+  cliente   Cliente   @relation(fields: [clienteId], references: [id])
+  formatura Formatura @relation(fields: [formaturaId], references: [id])
+
+  album    Album?
+  contrato Contrato?
+  @@id([formaturaId, clienteId])
+  @@unique([ficha, formaturaId])
+}
+
+model Cliente {
+  id               Int                @id
+  pessoa           Pessoa             @relation(fields: [id], references: [id])
+  ClienteFormatura ClienteFormatura[]
+}
+
+model Escola {
+  id         Int         @id @default(autoincrement())
+  nome       String
+  formaturas Formatura[]
+}
+
+model Formatura {
+  id               Int     @id @default(autoincrement())
+  ano              Int
+  onSecondSemester Boolean @default(true)
+
+  clientes   ClienteFormatura[]
+  eventos    Evento[]
+  Escola     Escola             @relation(fields: [escolaId], references: [id])
+  escolaId   Int
+}
+
+model Contrato {
+  id                          Int              @id @default(autoincrement())
+  valor                       Float
+  data                        DateTime
+  clienteFormatura            ClienteFormatura @relation(fields: [clienteFormaturaFormaturaId, clienteFormaturaClienteId], references: [formaturaId, clienteId])
+  clienteFormaturaFormaturaId Int
+  clienteFormaturaClienteId   Int
+}
+
+model Evento {
+  id    Int      @id @default(autoincrement())
+  preco Float
+  data  DateTime
+  nome  String
+
+  formatura        Formatura          @relation(fields: [formaturaId], references: [id])
+  formaturaId      Int
+  FotografoServico FotografoServico[]
+}
+
+model Album {
+  id                          Int              @id @default(autoincrement())
+  precoPorFoto                Float
+  precoPorMontagem            Float
+  fotosQtd                    Int
+  montagensQtd                Int
+  ClienteFormatura            ClienteFormatura @relation(fields: [clienteFormaturaFormaturaId, clienteFormaturaClienteId], references: [formaturaId, clienteId])
+  clienteFormaturaFormaturaId Int
+  clienteFormaturaClienteId   Int
+
+  @@unique([clienteFormaturaClienteId, clienteFormaturaFormaturaId])
+}
+
+model Endereco {
+  id     Int    @id @default(autoincrement())
+  cidade String
+  bairro String
+  estado String
+
+  pessoa Pessoa[]
+}

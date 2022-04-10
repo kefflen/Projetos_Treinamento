@@ -17,4 +17,5 @@ io.on('connection', socket => {
 export {
   io
 }
-serverHttp.listen(8080, () => console.log('Running at: http://localhost:8080'))
+
+serverHttp.listen(8080, '192.168.15.22' ,() => console.log('Running at: http://192.168.15.22:8080'))
