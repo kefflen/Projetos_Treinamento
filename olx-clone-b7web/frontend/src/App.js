@@ -1,11 +1,25 @@
+import { connect } from 'react-redux'
 import './App.css'
 
-function App() {
+const mapStateToProps = state => {
+  return {
+    user:state.user
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+
+  return {
+
+  }
+}
+
+function App(props) {
   return (
     <div className="App">
-
+      Funcionando...
     </div>
   )
 }
 
-export default App
+export default connect(mapStateToProps, mapDispatchToProps)(App)
