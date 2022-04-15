@@ -1,6 +1,6 @@
 
 const isLogged = () => {
-  let token = localStorage('token')
+  let token = localStorage.getItem('token')
   return !!token
 }
 export {
