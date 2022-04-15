@@ -1,5 +1,5 @@
 import styled from 'styled-components'
 
-export const FooterArea = styled`
+export const FooterArea = styled.footer`
 
 `

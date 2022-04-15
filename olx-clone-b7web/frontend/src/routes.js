@@ -7,7 +7,7 @@ import Home from './pages/Home'
 export default function Routes() {
   return (
     <ReactRoutes>
-      <Route path='/' element={<Home />} />
+      <Route path='/' element={<Home />} index/>
       <Route path='/about' element={<About />} />
     </ReactRoutes>
   )
