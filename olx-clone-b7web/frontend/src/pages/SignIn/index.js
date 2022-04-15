@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { PageContainer, PageTitle } from '../../components/MainComponents'
+import { ErrorMessage, PageContainer, PageTitle } from '../../components/MainComponents'
 import { doLogin } from '../../helpers/AuthHandler'
 import useApi from '../../helpers/useApi'
 import { PageArea } from './styled'
@@ -17,10 +17,15 @@ export default function SignIn() {
     <PageContainer>
       <PageTitle>Login</PageTitle>
       <PageArea>
+        {error &&
+          <ErrorMessage>{error}</ErrorMessage>
+        }
+
         <form onSubmit={async e => {
           e.preventDefault()
+          setDisabled(true)
 
-          const json = await api.login()
+          const json = await api.login(email, password)
 
           if (json.error) {
             setError(json.error)
@@ -29,19 +34,19 @@ export default function SignIn() {
             window.location.href = '/'
           }
 
-          setDisabled(true)
+          setDisabled(false)
         }}>
           <label className='area'>
             <div className='area--title'>Email</div>
             <div className='area--input'>
-              <input type='email'
+              <input type='email' required
                 value={email} onChange={e => setEmail(e.target.value)} disabled={disabled}/>
             </div>
           </label>
           <label className='area'>
             <div className='area--title'>Password</div>
             <div className='area--input'>
-              <input type='password'
+              <input type='password' required
                 value={password} onChange={e => setPassword(e.target.value)} disabled={disabled}/>
             </div>
           </label>
