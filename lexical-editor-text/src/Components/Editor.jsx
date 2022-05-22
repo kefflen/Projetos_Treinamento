@@ -1,11 +1,16 @@
-import React from 'react'
-import { $getRoot, $getSelection } from 'lexical'
-import LexicalComposer from '@lexical/react/LexicalComposer'
-import LexicalRichTextPlugin from '@lexical/react/LexicalRichTextPlugin'
-import LexicalContentEditable from '@lexical/react/LexicalContentEditable'
-import LexicalOnChangePlugin from '@lexical/react/LexicalOnChangePlugin'
-import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin'
-import { Container } from './styled'
+import React from 'react';
+import {
+  $getRoot,
+  $getSelection,
+} from 'lexical';
+import LexicalComposer from '@lexical/react/LexicalComposer';
+import LexicalRichTextPlugin from '@lexical/react/LexicalRichTextPlugin';
+import LexicalContentEditable from '@lexical/react/LexicalContentEditable';
+import LexicalOnChangePlugin from '@lexical/react/LexicalOnChangePlugin';
+import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
+import { Container } from './styled';
+import Toolbar from './Toolbar';
+
 
 function onChange(state) {
   state.read(() => {
@@ -29,6 +34,7 @@ export const Editor = () => {
           },
         }}
       >
+        <Toolbar />
         <LexicalRichTextPlugin
           contentEditable={
             <LexicalContentEditable className="edit-block" />
