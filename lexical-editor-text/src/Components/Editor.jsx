@@ -15,7 +15,6 @@ import Toolbar from './Toolbar';
 function onChange(state) {
   state.read(() => {
     const root = $getRoot()
-    console.log(root)
     const selection = $getSelection()
     console.log(selection)
   })
@@ -25,9 +24,18 @@ export const Editor = () => {
   return (
     <Container>
       <LexicalComposer
+        className="lexical-composer"
         initialConfig={{
           theme: {
             paragraph: 'mb-1',
+            rtl: 'text-right',
+            ltr: 'text-left',
+            text: {
+              bold: 'font-bold',
+              italic: 'italic',
+              underline: 'underline',
+              strikethrough: 'line-through',
+            }
           },
           onError(error) {
             throw error

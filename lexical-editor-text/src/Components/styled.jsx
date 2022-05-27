@@ -1,9 +1,11 @@
 import styled from "styled-components"
 
 export const Container = styled.div`
+  position: relative;
   border-radius: 5px;
   box-shadow: 1px 0.5px 0.3em black;
   margin: 10px;
+  
   .edit-block {
     outline: none;
     height: 450px;
